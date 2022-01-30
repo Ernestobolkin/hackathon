@@ -13,12 +13,16 @@ const dateMap = {
   Dec: "12",
 };
 
-const convertAllDates = (obj) => {
-  const newObj = obj;
-  newObj.dates = obj.dates.map((date) => {
-    return convertDate(date);
+export const convertAllDates = (arr) => {
+  const newArr = [];
+  arr.forEach((region) => {
+    const newObj = region;
+    newObj.dates = region.dates.map((date) => {
+      return convertDate(date);
+    });
+    newArr.push(newObj);
   });
-  return newObj;
+  return newArr
 };
 
 const convertDate = (holiday) => {
@@ -30,6 +34,5 @@ const convertDate = (holiday) => {
   const day = oldDate[1];
   const newDate = `2022-${day}-${monthNumber}`;
   newObj.date = newDate;
-  console.log(newObj);
   return newObj;
 };
