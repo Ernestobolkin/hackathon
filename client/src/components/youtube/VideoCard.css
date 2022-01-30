@@ -1,0 +1,20 @@
+.video-card {
+  display: flex !important;
+  cursor: pointer;
+}
+.video-card.item img {
+  max-width: 180px;
+}
+
+.video-card .content {
+  max-height: 90px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  hyphens: auto;
+  white-space: normal;
+  overflow: hidden;
+}
+.video-card .description {
+  display: inline-block;
+  font-size: 0.9rem;
+}
