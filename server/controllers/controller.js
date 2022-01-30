@@ -16,13 +16,8 @@ const addHoliday = async (req, res) => {
 
 const getHolidays = async (req, res) => {
   try {
-    const { region, dates } = req.body;
-    const data = {
-      region,
-      dates,
-    };
-    const HolidayData = await Holiday.create(data);
-    res.status(200).send({ HolidayData });
+    const data = await Holiday.find({});
+    res.status(200).send({ data });
   } catch (error) {
     res.status(400).send(error.message);
   }
