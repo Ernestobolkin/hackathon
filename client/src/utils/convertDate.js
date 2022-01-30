@@ -33,7 +33,7 @@ const convertDate = (holiday, color, i) => {
   const month = oldDate[0];
   const monthNumber = dateMap[month];
   const day = oldDate[1];
-  const newDate = `2022-${day}-${monthNumber}`;
+  const newDate = `2022-${monthNumber}-${day}`;
   newObj.to = newDate;
   newObj.from = newDate;
   newObj.title = holiday.name;

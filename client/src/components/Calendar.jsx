@@ -7,6 +7,7 @@ import axios from "axios";
 import { convertToEvents } from "../utils/convertToEvents";
 import { convertAllDates } from "../utils/convertDate";
 import { removeEmptySpaces } from "../utils/global";
+import { FilterNav } from "./filterBar";
 
 const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
   const navigate = useNavigate();
@@ -23,8 +24,10 @@ const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
 
   const handleClick = (e) => {
     // const path = removeEmptySpaces(holidays[e].title);
-    const holiday = events.find((event) => (event.id = event));
+    const holiday = events.find((event) => event.id === e);
     selectHoliday(holiday.title);
+    console.log(holiday.title);
+    console.log(e);
     // setSelectedHoliday(holiday.title);
     // navigateTo("Holidays/" + path);
   };
@@ -47,7 +50,7 @@ const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
         );
         const holidaysData = convertAllDates(holidays.data);
         setEvents(convertToEvents(holidaysData));
-        setHolidays(holidaysData);
+        setHolidays(convertToEvents(holidaysData));
       }
       getHoliday();
     } catch (error) {
@@ -62,16 +65,28 @@ const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [holidays]);
 
+  const eventChange = (e) => {
+    if (e !== "holidays") {
+      const filterdEvents = holidays.filter((holiday) => holiday.region === e);
+      setEvents(filterdEvents);
+    } else {
+      setEvents(holidays);
+    }
+  };
+
   return (
     <div className="calendar-container">
       {selectedHoliday ? (
         <Holidays title={selectedHoliday} back={back} />
       ) : (
-        <Calendar
-          events={events}
-          className="calendar"
-          onClickEvent={(e) => handleClick(e)}
-        />
+        <>
+          <FilterNav eventChange={eventChange} />
+          <Calendar
+            events={events}
+            className="calendar"
+            onClickEvent={(e) => handleClick(e)}
+          />
+        </>
       )}
     </div>
   );
