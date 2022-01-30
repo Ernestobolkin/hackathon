@@ -46,7 +46,6 @@ const CalendarComponent = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get("http://localhost:8080/get/holidays");
-<<<<<<< HEAD
       setData(data.data);
       return data;
     };
@@ -66,9 +65,7 @@ const CalendarComponent = () => {
           console.log(christian);
         }
       });
-=======
       convertAllDates(data.data);
->>>>>>> 96aea0a11648480d0cf434b1b4069efcc06279e2
     };
     getDataByReligion();
   }, []);
