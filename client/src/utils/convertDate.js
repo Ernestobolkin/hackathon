@@ -12,7 +12,7 @@ const dateMap = {
   Nov: "11",
   Dec: "12",
 };
-
+// Math.floor(Math.random()*16777215).toString(16)+"#";
 export const convertAllDates = (arr) => {
   const newArr = [];
   arr.forEach((region) => {
@@ -26,13 +26,16 @@ export const convertAllDates = (arr) => {
 };
 
 const convertDate = (holiday) => {
-  const newObj = holiday;
+  const newObj = {};
   const date = holiday.date;
   let oldDate = date.split(" ");
   const month = oldDate[0];
   const monthNumber = dateMap[month];
   const day = oldDate[1];
   const newDate = `2022-${day}-${monthNumber}`;
-  newObj.date = newDate;
+  newObj.to = newDate;
+  newObj.from = newDate;
+  newObj.title = holiday.name;
+  newObj.id = holiday._id;
   return newObj;
 };

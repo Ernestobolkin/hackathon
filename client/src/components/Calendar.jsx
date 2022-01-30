@@ -56,12 +56,14 @@ const CalendarComponent = () => {
     });
   };
 
+
   useEffect(() => {
     async function getHoliday() {
       const { data: holidays } = await axios.get(
         "http://localhost:8080/get/holidays"
       );
       const holidaysData = convertAllDates(holidays.data);
+      console.log(holidaysData);
       setHolidays(holidaysData);
     }
     getHoliday();
