@@ -2,48 +2,16 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles.css";
 import Calendar from "react-awesome-calendar";
+import Holidays from "./Holidays";
 import axios from "axios";
+import { convertToEvents } from "../utils/convertToEvents";
 import { convertAllDates } from "../utils/convertDate";
 import { removeEmptySpaces } from "../utils/global";
 
-const events = {
-  1: {
-    color: "#1fa506",
-    from: "2022-02-02",
-    id: 112,
-    title: "All Hallows Eve",
-    to: "2022-02-02",
-  },
-  2: {
-    color: "#1fa506",
-    from: "2022-02-02",
-    id: 2,
-    title: "All Hallows Eve",
-    to: "2022-02-02",
-  },
-  // color: "#1db255"
-  // from: "2022-06-01"
-  // id: 0
-  // title: "Epiphany"
-  // to: "2022-06-01"
-  // 2: {
-  //   id: 2,
-  //   color: "#fd3153",
-  //   from: "2022-02-02",
-  //   to: "2022-02-02",
-  //   title: "This is an event",
-  // },
-  3: {
-    id: 3,
-    color: "#fd3153",
-    from: "2022-02-02",
-    to: "2022-02-02",
-    title: "This is an event",
-  },
-};
-
-const CalendarComponent = () => {
+const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
   const navigate = useNavigate();
+  const [events, setEvents] = useState([]);
+  // const [selectedHoliday, setSelectedHoliday] = useState(null);
   const [holidays, setHolidays] = useState([]);
   const [israel, setIsrael] = useState([]);
   const [muslim, setMuslim] = useState([]);
@@ -54,8 +22,10 @@ const CalendarComponent = () => {
   };
 
   const handleClick = (e) => {
-    const path = removeEmptySpaces(holidays[e].title);
-    console.log(e);
+    // const path = removeEmptySpaces(holidays[e].title);
+    const holiday = events.find((event) => (event.id = event));
+    selectHoliday(holiday.title);
+    // setSelectedHoliday(holiday.title);
     // navigateTo("Holidays/" + path);
   };
 
@@ -76,6 +46,7 @@ const CalendarComponent = () => {
           "http://localhost:8080/get/holidays"
         );
         const holidaysData = convertAllDates(holidays.data);
+        setEvents(convertToEvents(holidaysData));
         setHolidays(holidaysData);
       }
       getHoliday();
@@ -93,12 +64,15 @@ const CalendarComponent = () => {
 
   return (
     <div className="calendar-container">
-      <Calendar
-        events={israel}
-        // events={Object.entries(events).map((day) => day[1])}
-        className="calendar"
-        onClickEvent={(e) => handleClick(e)}
-      />
+      {selectedHoliday ? (
+        <Holidays title={selectedHoliday} back={back} />
+      ) : (
+        <Calendar
+          events={events}
+          className="calendar"
+          onClickEvent={(e) => handleClick(e)}
+        />
+      )}
     </div>
   );
 };

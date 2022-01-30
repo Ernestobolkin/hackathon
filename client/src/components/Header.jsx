@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import "../assets/styles.css";
 
-const Header = () => {
+const Header = ({ back }) => {
   return (
     <div className="navbar">
-      <Link className="link" to="/">
+      <Link onClick={back} className="link" to="/">
         Calendar
       </Link>
       <Link className="link" to="/Holidays">

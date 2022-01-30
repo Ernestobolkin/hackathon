@@ -1,44 +1,32 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
+import React, { useState } from "react";
 import CalendarComponent from "./components/Calendar";
 import Holidays from "./components/Holidays";
 
 function App() {
-  const events = [
-    {
-      id: 1,
-      color: "#fd3153",
-      from: "2019-05-02T18:00:00+00:00",
-      to: "2019-05-05T19:00:00+00:00",
-      title: "This is an event",
-    },
-    {
-      id: 2,
-      color: "#1ccb9e",
-      from: "2019-05-01T13:00:00+00:00",
-      to: "2019-05-05T14:00:00+00:00",
-      title: "This is another event",
-    },
-    {
-      id: 3,
-      color: "#3694DF",
-      from: "2019-05-05T13:00:00+00:00",
-      to: "2019-05-05T20:00:00+00:00",
-      title: "This is also another event",
-    },
-  ];
-
-
-
+  const [selectedHoliday, setSelectedHoliday] = useState(null);
+  const selectHoliday = (holiday) => {
+    setSelectedHoliday(holiday);
+  };
+  const backToCalendar = () => {
+    setSelectedHoliday(null);
+  };
   return (
     <div>
       <BrowserRouter>
-        <Header />
+        <Header back={backToCalendar} />
         <Routes>
           <Route
             path="/"
             exact
-            element={<CalendarComponent></CalendarComponent>}
+            element={
+              <CalendarComponent
+                back={backToCalendar}
+                selectHoliday={selectHoliday}
+                selectedHoliday={selectedHoliday}
+              ></CalendarComponent>
+            }
           ></Route>
           <Route path="/Holidays" exact element={<Holidays></Holidays>}></Route>
         </Routes>
