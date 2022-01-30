@@ -1,0 +1,28 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: 0;
+}
+.navbar {
+  display: flex;
+  background: rgba(15, 15, 15, 0.808);
+  color: #ffffff;
+  min-height: 4vh;
+  display: flex;
+}
+.link {
+  font-size: 1.8vh;
+  color: #ffffff;
+  margin-right: 2vw;
+  margin-top: 0.5vh;
+  margin-left: 2vh;
+  text-decoration: none;
+}
+.calendar-container {
+  height: 80vh;
+  width: 80vw;
+  margin-left: 10vw;
+  margin-top: 5vh;
+}
+.calendar {
+}
