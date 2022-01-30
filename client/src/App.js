@@ -2,7 +2,6 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Header from "./components/Header";
 import CalendarComponent from "./components/Calendar";
 import Holidays from "./components/Holidays";
-import Calendar from "react-awesome-calendar";
 
 function App() {
   const events = [
@@ -28,6 +27,9 @@ function App() {
       title: "This is also another event",
     },
   ];
+
+
+
   return (
     <div>
       <BrowserRouter>
