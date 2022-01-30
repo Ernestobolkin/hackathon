@@ -7,6 +7,9 @@ import axios from "axios";
 const CalendarComponent = () => {
   const navigate = useNavigate();
   const [data, setData] = useState();
+  const [israel, setIsrael] = useState();
+  const [muslim, setMuslim] = useState();
+  const [christian, setChristian] = useState();
   const navigateTo = (path) => {
     navigate(`/${path}`, { replace: true });
   };
@@ -20,11 +23,7 @@ const CalendarComponent = () => {
     },
   };
 
-  console.log();
-
   const handleClick = (id) => {
-    // <Link to="/Holidays"></Link>;
-    console.log("e:");
     const path = events[id].title.replaceAll(" ", "");
     navigateTo("Holidays/" + path);
   };
@@ -32,9 +31,27 @@ const CalendarComponent = () => {
   useEffect(() => {
     const getData = async () => {
       const { data } = await axios.get("http://localhost:8080/get/holidays");
-      console.log(data);
+      setData(data.data);
+      return data;
     };
-    getData();
+    const getDataByReligion = async () => {
+      await getData();
+      data.forEach((religion) => {
+        if (religion.region === "israel") {
+          console.log(israel);
+          setIsrael(religion.dates);
+        }
+        if (religion.region === "islam") {
+          setMuslim(religion.dates);
+          console.log(muslim);
+        }
+        if (religion.region === "christian") {
+          setChristian(religion.dates);
+          console.log(christian);
+        }
+      });
+    };
+    getDataByReligion();
   }, []);
 
   return (
