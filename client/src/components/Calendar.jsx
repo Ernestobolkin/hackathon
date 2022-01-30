@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "../assets/styles.css";
 import Calendar from "react-awesome-calendar";
+import axios from "axios";
 
 const CalendarComponent = () => {
   const navigate = useNavigate();
+  const [data, setData] = useState();
   const navigateTo = (path) => {
     navigate(`/${path}`, { replace: true });
   };
@@ -12,23 +14,9 @@ const CalendarComponent = () => {
     1: {
       id: 1,
       color: "#fd3153",
-      from: "2022-30-01T18:00:00+00:00",
-      to: "2022-30-01T19:00:00+00:00",
+      from: "2022-02-02T09:00:00+00:00",
+      to: "2022-02-02T10:00:00+00:00",
       title: "This is an event",
-    },
-    2: {
-      id: 2,
-      color: "red",
-      from: "2019-05-01T13:00:00+00:00",
-      to: "2019-05-05T14:00:00+00:00",
-      title: "This is another event",
-    },
-    3: {
-      id: 3,
-      color: "#3694DF",
-      from: "2022-01-30T13:00:00+00:00",
-      to: "2022-01-30T20:00:00+00:00",
-      title: "This is also another event",
     },
   };
 
@@ -40,6 +28,14 @@ const CalendarComponent = () => {
     const path = events[id].title.replaceAll(" ", "");
     navigateTo("Holidays/" + path);
   };
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await axios.get("http://localhost:8080/get/holidays");
+      console.log(data);
+    };
+    getData();
+  }, []);
 
   return (
     <div className="calendar-container">

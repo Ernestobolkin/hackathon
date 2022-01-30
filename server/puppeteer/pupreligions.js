@@ -1,7 +1,6 @@
 const puppeteer = require("puppeteer");
-const createNewData = require("./postingData")
+const createNewData = require("./postingData");
 const religions = ["islam", "christian"];
-
 
 const religionFunc = async () => {
   await religions.forEach(async (religion) => {
@@ -30,7 +29,7 @@ const religionFunc = async () => {
       religionData.dates.push(holidayObj);
     });
     //post religionData to db
-    createNewData(religionData)
+    createNewData(religionData);
     // data.forEach((rel) => console.log(rel.dates));
     await browser.close();
   });
@@ -57,16 +56,17 @@ const israelFunc = async () => {
     });
     israel.dates.push(holidayObj);
   });
-  createNewData(israel)
+  createNewData(israel);
   //post israel to db
   await browser.close();
 };
 
+const getData = () => {
+  let date = new Date().toString();
+  if (date.includes("Jan 1")) {
+    religionFunc();
+    israelFunc();
+  }
+};
 
-
-const getData = ()=>{
-  console.log("works from pupper");
-  religionFunc()
-  israelFunc()
-}
-module.exports = getData
+module.exports = getData;

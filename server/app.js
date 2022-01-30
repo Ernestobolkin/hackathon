@@ -5,7 +5,7 @@ require("./mongoDB/mongoose");
 require("dotenv").config();
 const { addHoliday, getHolidays } = require("./controllers/controller");
 const getData =require("./puppeteer/pupreligions")
-// getData()
+getData()
 const port = process.env.PORT || 8080;
 const app = express();
 
