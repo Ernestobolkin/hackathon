@@ -8,19 +8,31 @@ import { removeEmptySpaces } from "../utils/global";
 
 const events = {
   1: {
-    id: 1,
-    color: "#fd3153",
+    color: "#1fa506",
     from: "2022-02-02",
+    id: 112,
+    title: "All Hallows Eve",
     to: "2022-02-02",
-    title: "This is an event",
   },
   2: {
-    id: 2,
-    color: "#fd3153",
+    color: "#1fa506",
     from: "2022-02-02",
+    id: 2,
+    title: "All Hallows Eve",
     to: "2022-02-02",
-    title: "This is an event",
   },
+  // color: "#1db255"
+  // from: "2022-06-01"
+  // id: 0
+  // title: "Epiphany"
+  // to: "2022-06-01"
+  // 2: {
+  //   id: 2,
+  //   color: "#fd3153",
+  //   from: "2022-02-02",
+  //   to: "2022-02-02",
+  //   title: "This is an event",
+  // },
   3: {
     id: 3,
     color: "#fd3153",
@@ -41,9 +53,10 @@ const CalendarComponent = () => {
     navigate(`/${path}`, { replace: true });
   };
 
-  const handleClick = (id) => {
-    const path = removeEmptySpaces(events[id].title);
-    navigateTo("Holidays/" + path);
+  const handleClick = (e) => {
+    const path = removeEmptySpaces(holidays[e].title);
+    console.log(e);
+    // navigateTo("Holidays/" + path);
   };
 
   const getDataByReligion = () => {
@@ -56,17 +69,19 @@ const CalendarComponent = () => {
     });
   };
 
-
   useEffect(() => {
-    async function getHoliday() {
-      const { data: holidays } = await axios.get(
-        "http://localhost:8080/get/holidays"
-      );
-      const holidaysData = convertAllDates(holidays.data);
-      console.log(holidaysData);
-      setHolidays(holidaysData);
+    try {
+      async function getHoliday() {
+        const { data: holidays } = await axios.get(
+          "http://localhost:8080/get/holidays"
+        );
+        const holidaysData = convertAllDates(holidays.data);
+        setHolidays(holidaysData);
+      }
+      getHoliday();
+    } catch (error) {
+      console.log(error);
     }
-    getHoliday();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -79,9 +94,10 @@ const CalendarComponent = () => {
   return (
     <div className="calendar-container">
       <Calendar
-        events={Object.entries(events).map((day) => day[1])}
+        events={israel}
+        // events={Object.entries(events).map((day) => day[1])}
         className="calendar"
-        onClickEvent={handleClick}
+        onClickEvent={(e) => handleClick(e)}
       />
     </div>
   );

@@ -17,15 +17,16 @@ export const convertAllDates = (arr) => {
   const newArr = [];
   arr.forEach((region) => {
     const newObj = region;
-    newObj.dates = region.dates.map((date) => {
-      return convertDate(date);
+    newObj.dates = region.dates.map((date, i) => {
+      let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+      return convertDate(date, color, i);
     });
     newArr.push(newObj);
   });
-  return newArr
+  return newArr;
 };
 
-const convertDate = (holiday) => {
+const convertDate = (holiday, color, i) => {
   const newObj = {};
   const date = holiday.date;
   let oldDate = date.split(" ");
@@ -37,5 +38,6 @@ const convertDate = (holiday) => {
   newObj.from = newDate;
   newObj.title = holiday.name;
   newObj.id = holiday._id;
+  newObj.color = color;
   return newObj;
 };
