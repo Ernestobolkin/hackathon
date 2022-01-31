@@ -9,29 +9,16 @@ import axios from "axios";
 const Holidays = ({ title, back }) => {
   const [videos, setVideos] = useState([]);
   const [selectedVideo, setSelectedVideo] = useState(null);
+  const [wikiLink, setWikiLink] = useState("");
 
   useEffect(() => {
-    const sendData = {
-      title,
-    };
+    setWikiLink(`https://en.wikipedia.org/wiki/${title}`);
 
-    const getWikiData = async () => {
-      const data = await axios.post("http://localhost:8080/get/wiki", sendData);
-      console.log(data);
-    };
-    getWikiData();
-
-    // (async () => {
-    //   await axios(config)
-    //     .then((res) => console.log(res))
-    //     .catch((e) => console.log(e));
-    // })();
-
-    // (async () => {
-    //   const response = await youtube.get("/search", { params: { q: title } });
-    //   setVideos(response.data.items);
-    //   setSelectedVideo(response.data.items[0]);
-    // })();
+    (async () => {
+      const response = await youtube.get("/search", { params: { q: title } });
+      setVideos(response.data.items);
+      setSelectedVideo(response.data.items[0]);
+    })();
   }, []);
   const onVideoSelect = (video) => {
     setSelectedVideo(video);
@@ -41,6 +28,12 @@ const Holidays = ({ title, back }) => {
     <>
       <h2>{title}</h2>
       <button onClick={back}>Back to Calendar</button>
+      <p>
+        Link To Wikipedia :{" "}
+        <a href={wikiLink} target="_blank">
+          {title}
+        </a>
+      </p>
       <div className="ui container">
         <div className="ui grid">
           <div className="ui row">
