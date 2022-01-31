@@ -16,12 +16,29 @@ const dateMap = {
 export const convertAllDates = (arr) => {
   const newArr = [];
   arr.forEach((region) => {
+    console.log(region);
     const newObj = region;
-    newObj.dates = region.dates.map((date, i) => {
-      let color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-      return convertDate(date, color, i);
-    });
-    newArr.push(newObj);
+    if (newObj.region === "israel") {
+      newObj.dates = region.dates.map((date, i) => {
+        let color = "blue";
+        return convertDate(date, color, i);
+      });
+      newArr.push(newObj);
+    }
+    if (newObj.region === "christian") {
+      newObj.dates = region.dates.map((date, i) => {
+        let color = "red";
+        return convertDate(date, color, i);
+      });
+      newArr.push(newObj);
+    }
+    if (newObj.region === "islam") {
+      newObj.dates = region.dates.map((date, i) => {
+        let color = "green ";
+        return convertDate(date, color, i);
+      });
+      newArr.push(newObj);
+    }
   });
   return newArr;
 };
