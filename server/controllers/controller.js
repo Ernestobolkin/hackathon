@@ -1,5 +1,5 @@
 const Holiday = require("../models/holidaySchema");
-const getWikiData = require("../puppeteer/wikiPuppet")
+const getWikiData = require("../puppeteer/wikiPuppet");
 
 const addHoliday = async (req, res) => {
   try {
@@ -27,7 +27,8 @@ const getHolidays = async (req, res) => {
 const getWiki = async (req, res) => {
   try {
     const { title } = req.body;
-    const data = await getWikiData(title)
+    console.log(title);
+    const data = await getWikiData(title);
     console.log(data);
     res.status(200).send(data);
   } catch (error) {
@@ -35,4 +36,4 @@ const getWiki = async (req, res) => {
   }
 };
 
-module.exports = { addHoliday, getHolidays ,getWiki};
+module.exports = { addHoliday, getHolidays, getWiki };

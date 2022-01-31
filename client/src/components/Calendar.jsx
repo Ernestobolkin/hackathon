@@ -24,13 +24,8 @@ const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
   };
 
   const handleClick = (e) => {
-    // const path = removeEmptySpaces(holidays[e].title);
     const holiday = events.find((event) => event.id === e);
     selectHoliday(holiday.title);
-    console.log(holiday.title);
-    console.log(e);
-    // setSelectedHoliday(holiday.title);
-    // navigateTo("Holidays/" + path);
   };
 
   const getDataByReligion = () => {
