@@ -1,16 +1,19 @@
 const puppeteer = require("puppeteer");
 
-const getSelector = async(page, selector) => await page.$(selector);
+const getSelector = async (page, selector) => await page.$(selector);
 const getSelectors = async (page, selector) => await page.$$(selector);
-const getAttrFromElements = async (elements, attr) =>{
-  const newElements = await Promise.all(elements.map(async (element) =>{
-    const value = await (await element.getProperty(attr)).jsonValue()
-    return value
-  }))
-  return newElements
-}
+const getAttrFromElements = async (elements, attr) => {
+  const newElements = await Promise.all(
+    elements.map(async (element) => {
+      const value = await (await element.getProperty(attr)).jsonValue();
+      return value;
+    })
+  );
+  return newElements;
+};
 
 const getWikiData = async (title) => {
+  console.log(title);
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
   await page.goto(`https://en.wikipedia.org/wiki/${title}`);
@@ -20,8 +23,7 @@ const getWikiData = async (title) => {
   const newParagraphs = await getAttrFromElements(paragraphs, "innerText");
   const selectedParagraph = newParagraphs.find((p) => p.length > 10);
   await browser.close();
-  return selectedParagraph
-  
+  return selectedParagraph;
 };
 module.exports = getWikiData;
 

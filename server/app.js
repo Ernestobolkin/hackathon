@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 const publicPath = path.join(__dirname, "build");
 app.use(express.static(publicPath));
 
-app.get("/get/wiki", getWiki);
+app.post("/get/wiki", getWiki);
 
 app.post("/add/holiday", addHoliday);
 
