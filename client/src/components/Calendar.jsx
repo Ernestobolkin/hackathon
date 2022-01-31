@@ -11,17 +11,11 @@ import { FilterNav } from "./filterBar";
 import { ColorKey } from "./colorKey";
 
 const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
-  const navigate = useNavigate();
   const [events, setEvents] = useState([]);
-  // const [selectedHoliday, setSelectedHoliday] = useState(null);
   const [holidays, setHolidays] = useState([]);
   const [israel, setIsrael] = useState([]);
   const [muslim, setMuslim] = useState([]);
   const [christian, setChristian] = useState([]);
-
-  const navigateTo = (path) => {
-    navigate(`/${path}`, { replace: true });
-  };
 
   const handleClick = (e) => {
     const holiday = events.find((event) => event.id === e);
@@ -42,7 +36,7 @@ const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
     try {
       async function getHoliday() {
         const { data: holidays } = await axios.get(
-          "http://localhost:8080/get/holidays"
+          "/get/holidays"
         );
         const holidaysData = convertAllDates(holidays.data);
         setEvents(convertToEvents(holidaysData));
