@@ -8,6 +8,7 @@ import { convertToEvents } from "../utils/convertToEvents";
 import { convertAllDates } from "../utils/convertDate";
 import { removeEmptySpaces } from "../utils/global";
 import { FilterNav } from "./filterBar";
+import { ColorKey } from "./colorKey";
 
 const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
   const navigate = useNavigate();
@@ -81,6 +82,7 @@ const CalendarComponent = ({ selectHoliday, back, selectedHoliday }) => {
       ) : (
         <>
           <FilterNav eventChange={eventChange} />
+          <ColorKey />
           <Calendar
             events={events}
             className="calendar"

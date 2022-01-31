@@ -24,5 +24,11 @@
   margin-left: 10vw;
   margin-top: 5vh;
 }
-.calendar {
+.colorKey {
+  background-color: #00000088;
+  padding: 1px;
+  cursor: pointer;
+  margin-left: 4px;
+  width: 5vw;
+  color: white;
 }
