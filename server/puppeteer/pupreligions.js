@@ -57,7 +57,6 @@ const israelFunc = async () => {
     israel.dates.push(holidayObj);
   });
   createNewData(israel);
-  //post israel to db
   await browser.close();
 };
 
