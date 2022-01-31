@@ -3,9 +3,13 @@ const path = require("path");
 const cors = require("cors");
 require("./mongoDB/mongoose");
 require("dotenv").config();
-const { addHoliday, getHolidays } = require("./controllers/controller");
-const getData =require("./puppeteer/pupreligions")
-getData()
+const {
+  addHoliday,
+  getHolidays,
+  getWiki,
+} = require("./controllers/controller");
+const getData = require("./puppeteer/pupreligions");
+getData();
 const port = process.env.PORT || 8080;
 const app = express();
 
@@ -15,6 +19,8 @@ app.use(express.urlencoded({ extended: true }));
 
 const publicPath = path.join(__dirname, "build");
 app.use(express.static(publicPath));
+
+app.get("/get/wiki", getWiki);
 
 app.post("/add/holiday", addHoliday);
 
