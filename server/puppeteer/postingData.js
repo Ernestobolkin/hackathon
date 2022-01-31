@@ -4,7 +4,7 @@ const createNewData = (data) => {
   try {
     let config = {
       method: "post",
-      url: "http://localhost:8080/add/holiday",
+      url: "/add/holiday",
       data,
     };
 
