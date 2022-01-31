@@ -32,3 +32,14 @@
   width: 5vw;
   color: white;
 }
+
+.colorKeyContiner {
+  background-color: rgba(255, 255, 255, 0.5);
+  border: 3px white solid;
+  width: 12vw;
+  height: 7vh;
+  align-items: center;
+  margin-top: 2vh;
+  margin-left: 2vw;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+}
